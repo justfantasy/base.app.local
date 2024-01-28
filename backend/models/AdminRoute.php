@@ -3,7 +3,6 @@
 namespace backend\models;
 
 use Yii;
-use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "admin_routes".
@@ -15,12 +14,12 @@ use yii\db\ActiveRecord;
  * @property int $created_at
  * @property int $updated_at
  */
-class AdminRoute extends ActiveRecord
+class AdminRoute extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
      */
-    public static function tableName(): string
+    public static function tableName()
     {
         return 'admin_routes';
     }
@@ -28,7 +27,7 @@ class AdminRoute extends ActiveRecord
     /**
      * {@inheritdoc}
      */
-    public function rules(): array
+    public function rules()
     {
         return [
             [['name', 'route', 'created_at', 'updated_at'], 'required'],
@@ -41,7 +40,7 @@ class AdminRoute extends ActiveRecord
     /**
      * {@inheritdoc}
      */
-    public function attributeLabels(): array
+    public function attributeLabels()
     {
         return [
             'id' => 'ID',

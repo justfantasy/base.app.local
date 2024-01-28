@@ -12,6 +12,7 @@ class m130524_201442_init extends Migration
             'username' => $this->string(50)->notNull()->comment('用户名'),
             'password' => $this->string(64)->notNull()->comment('密码'),
             'real_name' => $this->string(50)->notNull()->comment('姓名'),
+            'status' => $this->tinyInteger()->notNull()->defaultValue(0)->comment('状态0正常1禁用'),
             'created_at' => $this->integer()->notNull(),
             'updated_at' => $this->integer()->notNull(),
         ]);
@@ -102,6 +103,22 @@ class m130524_201442_init extends Migration
 
         $this->addCommentOnTable('{{%admin_permission_route}}', '权限路由表');
         $this->createIndex('idx_permission_id', '{{%admin_permission_route}}', 'permission_id');
+
+        $this->createTable(
+            '{{%admin_operation_logs}}',
+            [
+                'id' => $this->primaryKey(),
+                'method' => $this->string(10)->notNull()->defaultValue('')->comment('请求方法'),
+                'route' => $this->string(128)->notNull()->defaultValue('')->comment('请求路由'),
+                'ip' => $this->string(60)->notNull()->defaultValue('')->comment('IP地址'),
+                'params' => $this->text()->defaultValue(null)->comment('请求参数'),
+                'created_by' => $this->integer()->notNull()->defaultValue(0)->comment('新增人id'),
+                'created_at' => $this->integer()->notNull()->defaultValue(0)->comment('新增时间'),
+            ]
+        );
+
+        $this->createIndex('idx_created_at', '{{%admin_operation_logs}}', ['created_at']);
+        $this->addCommentOnTable('{{%admin_operation_logs}}', '管理员操作日志表');
     }
 
     public function down()

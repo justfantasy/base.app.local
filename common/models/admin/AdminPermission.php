@@ -1,8 +1,8 @@
 <?php
 
-namespace backend\models;
+namespace common\models\admin;
 
-use Yii;
+use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 
 /**
@@ -15,6 +15,13 @@ use yii\db\ActiveRecord;
  */
 class AdminPermission extends ActiveRecord
 {
+    public function behaviors(): array
+    {
+        return [
+            ['class' => TimestampBehavior::class],
+        ];
+    }
+
     /**
      * {@inheritdoc}
      */
