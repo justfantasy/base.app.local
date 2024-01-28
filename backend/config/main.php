@@ -16,10 +16,16 @@ return [
         'request' => [
             'csrfParam' => '_csrf-backend',
         ],
+        'response' => [
+            'format' => 'json',
+        ],
         'user' => [
-            'identityClass' => 'common\models\User',
-            'enableAutoLogin' => true,
-            'identityCookie' => ['name' => '_identity-backend', 'httpOnly' => true],
+            'identityClass' => 'common\models\admin\AdminUser',
+            'enableAutoLogin' => false,
+        ],
+        'jwt' => [
+            'class' => sizeg\jwt\Jwt::class,
+            'key' => 'WstOpBBatR23A$s#ya%snYTEdB',
         ],
         'session' => [
             // this is the name of the session cookie used for login on the backend

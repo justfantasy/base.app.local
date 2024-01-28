@@ -18,7 +18,7 @@ class AdminRole extends ActiveRecord
     public function behaviors(): array
     {
         return [
-            ['class' => TimestampBehavior::class],
+            TimestampBehavior::class
         ];
     }
 
